@@ -1,1 +1,174 @@
+import java.util.Scanner;
+import java.util.*;
+public class NickPatsTicTacToeFinal {
+
+     
+        // The tic tac toe grid and the game status
+   public static final int rowStatus = 3, colStatus = 3; 
+        // number of rows and columns
+   public static int[][] gameDisplay = new int[rowStatus][colStatus];
+        // tic tac toe grid in 2D array
+        //  uses (tileIsEmpty, tileContainsX, tileContainsO)
+   public static int stateOfBoard;  
+        // the current state of the game, based off of:
+        // (gameInSession, gameEndedInDraw, XsWonGame, OsWonGame)
+                                    
+   public static int Player;
+        // the current player (based off of tileContainsX or tileContainsO)
+   public static int currentRow, currentCol;
+ 
+   public static Scanner scan = new Scanner(System.in);
+       //simple scanner
+   
+
+   public static final int gameInSession = 0;
+   public static final int gameEndedInDraw = 1;
+   public static final int XsWonGame = 2;
+   public static final int OsWonGame = 3;
+      // game states
+
+   public static final int tileIsEmpty = 0;
+   public static final int tileContainsX = 1;
+   public static final int tileContainsO = 2;
+       // grid contents
+
+   //Player with the "mainInt" makes one move, with input checks
+   //Updates variables "currentRow" and "currentCol".
+   public static void playerMove(int mainInt) {
+      boolean validInput = false;
+      do {
+         if (mainInt == tileContainsX) {
+            System.out.print("Player 'X', enter your move in the format row[1-3] column[1-3]: ");
+         } else {
+            System.out.print("Player 'O', enter your move in the format row[1-3] column[1-3]: ");
+         }
+         int rowInt = scan.nextInt() - 1;  // array index starts at 0 instead of 1
+         int colInt = scan.nextInt() - 1;
+         if (rowInt >= 0 && rowInt < rowStatus && colInt >= 0 && colInt < colStatus && gameDisplay[rowInt][colInt] == tileIsEmpty) {
+            currentRow = rowInt;
+            currentCol = colInt;
+            gameDisplay[currentRow][currentCol] = mainInt;  // update tic tac toe grid content
+            validInput = true;  // input okay, exit loop
+         } else {
+            System.out.println("This move at (" + (rowInt + 1) + "," + (colInt + 1)
+                  + ") is not valid. Try again...");
+         }
+      } while (!validInput);  // repeat until input is valid
+   }
+ 
+   //Update the "stateOfBoard" after the player with "mainInt" has placed on
+   //(currentRow, currentCol).
+   public static void updateGame(int mainInt, int currentRow, int currentCol) {
+      if (hasWon(mainInt, currentRow, currentCol)) {  // check if winning move
+         stateOfBoard = (mainInt == tileContainsX) ? XsWonGame : OsWonGame;
+      } else if (isDraw()) {  // check for draw
+         stateOfBoard = gameEndedInDraw;
+      }
+      // Otherwise, no change to stateOfBoard (still gameInSession).
+   }
+ 
+   // Returns draw if applicable
+   public static boolean isDraw() {
+      for (int rowInt = 0; rowInt < rowStatus; ++rowInt) {
+          
+         for (int colInt = 0; colInt < colStatus; ++colInt) {
+             
+            if (gameDisplay[rowInt][colInt] == tileIsEmpty) {
+               return false;  // empty grid found, quit
+            }
+         }
+      }
+      return true;
+      //declares draw
+   }
+ 
+   //Return true if the player with "mainInt" has won
+   //(currentRow, currentCol)
+   public static boolean hasWon(int mainInt, int currentRow, int currentCol) {
+      return (gameDisplay[currentRow][0] == mainInt         
+                   && gameDisplay[currentRow][1] == mainInt
+                   && gameDisplay[currentRow][2] == mainInt
+                   //This checks for the win condition of 3 in a row
+              || gameDisplay[0][currentCol] == mainInt      // 3-in-the-colInt
+                   && gameDisplay[1][currentCol] == mainInt
+                   && gameDisplay[2][currentCol] == mainInt
+                   ////This checks for the win condition of 3 in a column
+              || currentRow == currentCol
+                   && gameDisplay[0][2] == mainInt
+                   && gameDisplay[1][1] == mainInt
+                   && gameDisplay[2][0] == mainInt
+                   //This checks for the win condition of 3 diagonally
+              || currentRow + currentCol == 2
+                   && gameDisplay[0][0] == mainInt
+                   && gameDisplay[1][1] == mainInt
+                   && gameDisplay[2][2] == mainInt);
+                   //same win condition as above, but reversed
+   }
+
+   public static void printCell(int content) {
+      switch (content) {
+         case tileContainsO: System.out.print(" O "); break;
+         case tileContainsX:  System.out.print(" X "); break;
+         case tileIsEmpty:  System.out.print("   "); break;
+      }
+   }
+    
+   // Creates the contents inside of the tic tac toe grid
+   public static void initGame() {
+      for (int rowInt = 0; rowInt < rowStatus; ++rowInt) {
+         for (int colInt = 0; colInt < colStatus; ++colInt) {
+            gameDisplay[rowInt][colInt] = tileIsEmpty;  // all cells empty
+         }
+      }
+      stateOfBoard = gameInSession; // game ready
+      Player = tileContainsX;
+   }
+ 
+   //This prints the tic tac toe grid
+   public static void printTicTacToeGrid() {
+      for (int rowInt = 0; rowInt < rowStatus; ++rowInt) {
+         for (int colInt = 0; colInt < colStatus; ++colInt) {
+            printCell(gameDisplay[rowInt][colInt]);
+            if (colInt != colStatus - 1) {
+               System.out.print("|");
+               //This prints the vertical bars to the grid
+            }
+         }
+         System.out.println();
+         if (rowInt != rowStatus - 1) {
+            System.out.println("==========="); 
+            // this prints the horizontal bars to the grid
+         }
+      }
+      System.out.println();
+   }
+ 
+      public static void main(String[] args) {
+      initGame();
+      do {
+         playerMove(Player); 
+         // This updates currentRow and currentCol
+         updateGame(Player, currentRow, currentCol); 
+         // Thisupdates stateOfBoard
+         printTicTacToeGrid();
+         //This prints the final board
+         Player = (Player == tileContainsX) ? tileContainsO : tileContainsX;
+         //* This code determines which player is currently going
+         
+         if (stateOfBoard == gameEndedInDraw) {
+            System.out.println("The game ended in a draw. want to play again?");
+            //This prints if the game meets the requirements for a draw
+         } else if (stateOfBoard == OsWonGame) {
+            System.out.println("O won, thanks for playing!");
+            //This prints if the game meets the requirements for O winning
+         } else if (stateOfBoard == XsWonGame) {
+            System.out.println("X won, thanks for playing!");
+            //This prints if the game meets the requirements for X winning
+         }
+       
+
+      } while (stateOfBoard == gameInSession); // if game over hasnt been reached, repeat
+   }
+ 
+}
 

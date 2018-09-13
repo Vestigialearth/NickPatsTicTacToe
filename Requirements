@@ -1,10 +1,10 @@
 --Create a piece of code that lets a player(s) play tic-tac-toe--
                         -Objectives-
-  1. Create a simple output statement that greets the player and informs them of the rules.
-  2. Design and implement a fairly simple input/graph representation to show the user(s) their moves.
-  3. Design and implement a row and column system in order to both capture and be plugged into the table from step (3).
-  4. Make sure that the program runs and compiles
-  5. Make sure that run time is instant, or near instant.
-  6. Make sure that there are no bugs, and all invalid inputs are protected by some error checking method
-  7. Bug test for any miscellaneous bugs
-  8. Have other people try and break the code to double test for bugs
+  1. Create a simple output statement that greets the player and informs them of the rules. --Created, needs more detail.
+  2. Design and implement a fairly simple input/graph representation to show the user(s) their moves. --Done.
+  3. Design and implement a row and column system in order to both capture and be plugged into the table from step (3). --Done
+  4. Make sure that the program runs and compiles --Done
+  5. Make sure that run time is instant, or near instant. --Done
+  6. Make sure that there are no bugs, and all invalid inputs are protected by some error checking method --Mostly done
+  7. Bug test for any miscellaneous bugs --Done, the biggest bug is the input being crappy
+  8. Have other people try and break the code to double test for bugs 

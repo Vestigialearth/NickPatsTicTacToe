@@ -1,32 +1,29 @@
 import java.util.Scanner;
 import java.util.*;
-public class NickPatsTicTacToeFinal {
+
+public class NickPatsTicTacToeFinalx {
 
      
-        // The tic tac toe grid and the game status
-   public static final int rowStatus = 3, colStatus = 3; 
+         
+   public static Scanner scan = new Scanner(System.in);
+       //simple scanner
+   public static int rowStatus = 3, colStatus = 3; 
         // number of rows and columns
    public static int[][] gameDisplay = new int[rowStatus][colStatus];
         // tic tac toe grid in 2D array
         //  uses (tileIsEmpty, tileContainsX, tileContainsO)
    public static int stateOfBoard;  
         // the current state of the game, based off of:
-        // (gameInSession, gameEndedInDraw, XsWonGame, OsWonGame)
-                                    
+        // (gameInSession, gameEndedInDraw, XsWonGame, OsWonGame)                              
    public static int Player;
         // the current player (based off of tileContainsX or tileContainsO)
    public static int currentRow, currentCol;
- 
-   public static Scanner scan = new Scanner(System.in);
-       //simple scanner
-   
-
-   public static final int gameInSession = 0;
-   public static final int gameEndedInDraw = 1;
-   public static final int XsWonGame = 2;
-   public static final int OsWonGame = 3;
+         // The tic tac toe grid and the game status
+   public static int gameInSession = 0;
+   public static int gameEndedInDraw = 1;
+   public static int XsWonGame = 2;
+   public static int OsWonGame = 3;
       // game states
-
    public static final int tileIsEmpty = 0;
    public static final int tileContainsX = 1;
    public static final int tileContainsO = 2;
@@ -36,11 +33,12 @@ public class NickPatsTicTacToeFinal {
    //Updates variables "currentRow" and "currentCol".
    public static void playerMove(int mainInt) {
       boolean validInput = false;
+      
       do {
          if (mainInt == tileContainsX) {
-            System.out.print("Player 'X', enter your move in the format row[1-3] column[1-3]: ");
+            System.out.print("Player 1, Please enter your move. You will represent X ");
          } else {
-            System.out.print("Player 'O', enter your move in the format row[1-3] column[1-3]: ");
+            System.out.print("Player 2, Please enter your move. You will represent O ");
          }
          int rowInt = scan.nextInt() - 1;  // array index starts at 0 instead of 1
          int colInt = scan.nextInt() - 1;
@@ -50,25 +48,25 @@ public class NickPatsTicTacToeFinal {
             gameDisplay[currentRow][currentCol] = mainInt;  // update tic tac toe grid content
             validInput = true;  // input okay, exit loop
          } else {
-            System.out.println("This move at (" + (rowInt + 1) + "," + (colInt + 1)
-                  + ") is not valid. Try again...");
+            System.out.println("You have entered an invalid move. Make sure that your move is in the correct format and please try again.");
          }
       } while (!validInput);  // repeat until input is valid
    }
  
-   //Update the "stateOfBoard" after the player with "mainInt" has placed on
+   //Refresh "stateOfBoard" after the player with "mainInt" has placed on
    //(currentRow, currentCol).
-   public static void updateGame(int mainInt, int currentRow, int currentCol) {
+   public static void updateGame (int mainInt, int currentRow, int currentCol) {
       if (hasWon(mainInt, currentRow, currentCol)) {  // check if winning move
          stateOfBoard = (mainInt == tileContainsX) ? XsWonGame : OsWonGame;
-      } else if (isDraw()) {  // check for draw
+      } else if (drawCondition()) {  // This checks for the Draw condition
          stateOfBoard = gameEndedInDraw;
+         //https://stackoverflow.com/questions/1056316/algorithm-for-determining-tic-tac-toe-game-over
       }
       // Otherwise, no change to stateOfBoard (still gameInSession).
    }
  
    // Returns draw if applicable
-   public static boolean isDraw() {
+   public static boolean drawCondition() {
       for (int rowInt = 0; rowInt < rowStatus; ++rowInt) {
           
          for (int colInt = 0; colInt < colStatus; ++colInt) {
@@ -85,32 +83,37 @@ public class NickPatsTicTacToeFinal {
    //Return true if the player with "mainInt" has won
    //(currentRow, currentCol)
    public static boolean hasWon(int mainInt, int currentRow, int currentCol) {
-      return (gameDisplay[currentRow][0] == mainInt         
+     
+     return (gameDisplay[currentRow][0] == mainInt         
                    && gameDisplay[currentRow][1] == mainInt
                    && gameDisplay[currentRow][2] == mainInt
                    //This checks for the win condition of 3 in a row
+                   
               || gameDisplay[0][currentCol] == mainInt      // 3-in-the-colInt
                    && gameDisplay[1][currentCol] == mainInt
                    && gameDisplay[2][currentCol] == mainInt
                    ////This checks for the win condition of 3 in a column
+                   
               || currentRow == currentCol
                    && gameDisplay[0][2] == mainInt
                    && gameDisplay[1][1] == mainInt
                    && gameDisplay[2][0] == mainInt
                    //This checks for the win condition of 3 diagonally
+                   
               || currentRow + currentCol == 2
                    && gameDisplay[0][0] == mainInt
                    && gameDisplay[1][1] == mainInt
                    && gameDisplay[2][2] == mainInt);
                    //same win condition as above, but reversed
    }
-
+     //made from this idea
+     //https://stackoverflow.com/questions/18548265/testing-tic-tac-toe-win-condition
    public static void printCell(int content) {
       switch (content) {
          case tileContainsO: System.out.print(" O "); break;
          case tileContainsX:  System.out.print(" X "); break;
          case tileIsEmpty:  System.out.print("   "); break;
-      }
+      } 
    }
     
    // Creates the contents inside of the tic tac toe grid
@@ -133,6 +136,8 @@ public class NickPatsTicTacToeFinal {
                System.out.print("|");
                //This prints the vertical bars to the grid
             }
+            //(some) help with the for loop logic for printing the board:
+            //http://www.d.umn.edu/~tcolburn/cs2511/projects/Java/team_project/ocsf/src/tictactoe/Board.java.xhtml
          }
          System.out.println();
          if (rowInt != rowStatus - 1) {
@@ -171,4 +176,5 @@ public class NickPatsTicTacToeFinal {
    }
  
 }
+
 

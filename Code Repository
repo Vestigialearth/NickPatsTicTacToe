@@ -3,8 +3,8 @@ import java.util.*;
 
 public class NickPatsTicTacToeFinalx {
 
-     
-         
+//https://www.youtube.com/watch?v=R51BIlAt_Hg
+
    public static Scanner scan = new Scanner(System.in);
        //simple scanner
    public static int rowStatus = 3, colStatus = 3; 

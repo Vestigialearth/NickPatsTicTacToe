@@ -84,29 +84,18 @@ public class NickPatsTicTacToeFinalx {
    //(currentRow, currentCol)
    public static boolean hasWon(int mainInt, int currentRow, int currentCol) {
      
-     return (gameDisplay[currentRow][0] == mainInt         
-                   && gameDisplay[currentRow][1] == mainInt
-                   && gameDisplay[currentRow][2] == mainInt
-                   //This checks for the win condition of 3 in a row
+  return (gameDisplay[currentRow][0] == mainInt && gameDisplay[currentRow][1] == mainInt && gameDisplay[currentRow][2] == mainInt
+     //This checks for the win condition of 3 in a row
                    
-              || gameDisplay[0][currentCol] == mainInt      // 3-in-the-colInt
-                   && gameDisplay[1][currentCol] == mainInt
-                   && gameDisplay[2][currentCol] == mainInt
-                   ////This checks for the win condition of 3 in a column
+  || gameDisplay[0][currentCol] == mainInt && gameDisplay[1][currentCol] == mainInt && gameDisplay[2][currentCol] == mainInt
+     //This checks for the win condition of 3 in a column
                    
-              || currentRow == currentCol
-                   && gameDisplay[0][2] == mainInt
-                   && gameDisplay[1][1] == mainInt
-                   && gameDisplay[2][0] == mainInt
-                   //This checks for the win condition of 3 diagonally
+  || currentRow == currentCol && gameDisplay[0][2] == mainInt && gameDisplay[1][1] == mainInt && gameDisplay[2][0] == mainInt
+     //This checks for the win condition of 3 diagonally
                    
-              || currentRow + currentCol == 2
-                   && gameDisplay[0][0] == mainInt
-                   && gameDisplay[1][1] == mainInt
-                   && gameDisplay[2][2] == mainInt);
-                   //same win condition as above, but reversed
+  || currentRow + currentCol == 2 && gameDisplay[0][0] == mainInt && gameDisplay[1][1] == mainInt && gameDisplay[2][2] == mainInt);
+     //same win condition as above, but reversed
    }
-     //made from this idea
      //https://stackoverflow.com/questions/18548265/testing-tic-tac-toe-win-condition
    public static void printCell(int content) {
       switch (content) {

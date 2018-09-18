@@ -1,10 +1,8 @@
 import java.util.Scanner;
 import java.util.*;
-
 public class NickPatsTicTacToeFinalx {
 
-//https://www.youtube.com/watch?v=R51BIlAt_Hg
-
+   //https://www.youtube.com/watch?v=R51BIlAt_Hg
    public static Scanner scan = new Scanner(System.in);
        //simple scanner
    public static int rowStatus = 3, colStatus = 3; 
@@ -32,6 +30,7 @@ public class NickPatsTicTacToeFinalx {
    public static int winCountForO = 0;
    //Player with the "mainInt" makes one move, with input checks
    //Updates variables "currentRow" and "currentCol".
+   
    public static void playerMove(int mainInt) {
       boolean validInput = false;
 
@@ -65,7 +64,6 @@ public class NickPatsTicTacToeFinalx {
       }
       // Otherwise, no change to stateOfBoard (still gameInSession).
    }
- 
    // Returns draw if applicable
    public static boolean drawCondition() {
       for (int rowInt = 0; rowInt < rowStatus; ++rowInt) {
@@ -80,25 +78,24 @@ public class NickPatsTicTacToeFinalx {
       return true;
       //declares draw
    }
- 
    //Return true if the player with "mainInt" has won
    //(currentRow, currentCol)
    public static boolean hasWon(int mainInt, int currentRow, int currentCol) {
-     
-  return (gameDisplay[currentRow][0] == mainInt && gameDisplay[currentRow][1] == mainInt && gameDisplay[currentRow][2] == mainInt
-     //This checks for the win condition of 3 in a row
-                   
-  || gameDisplay[0][currentCol] == mainInt && gameDisplay[1][currentCol] == mainInt && gameDisplay[2][currentCol] == mainInt
-     //This checks for the win condition of 3 in a column
-                   
-  || currentRow == currentCol && gameDisplay[0][2] == mainInt && gameDisplay[1][1] == mainInt && gameDisplay[2][0] == mainInt
-     //This checks for the win condition of 3 diagonally
-                   
-  || currentRow + currentCol == 2 && gameDisplay[0][0] == mainInt && gameDisplay[1][1] == mainInt && gameDisplay[2][2] == mainInt);
-     //same win condition as above, but reversed
+         
+      return (gameDisplay[currentRow][0] == mainInt && gameDisplay[currentRow][1] == mainInt && gameDisplay[currentRow][2] == mainInt
+         //This checks for the win condition of 3 in a row
+                       
+      || gameDisplay[0][currentCol] == mainInt && gameDisplay[1][currentCol] == mainInt && gameDisplay[2][currentCol] == mainInt
+         //This checks for the win condition of 3 in a column
+                       
+      || currentRow == currentCol && gameDisplay[0][2] == mainInt && gameDisplay[1][1] == mainInt && gameDisplay[2][0] == mainInt
+         //This checks for the win condition of 3 diagonally
+                       
+      || currentRow + currentCol == 2 && gameDisplay[0][0] == mainInt && gameDisplay[1][1] == mainInt && gameDisplay[2][2] == mainInt);
+         //same win condition as above, but reversed
    }
      //https://stackoverflow.com/questions/18548265/testing-tic-tac-toe-win-condition
-   public static void printCell(int content) {
+   public static void cellContents(int content) {
       switch (content) {
          case tileContainsO: System.out.print(" O "); break;
          case tileContainsX:  System.out.print(" X "); break;
@@ -121,7 +118,7 @@ public class NickPatsTicTacToeFinalx {
    public static void printTicTacToeGrid() {
       for (int rowInt = 0; rowInt < rowStatus; ++rowInt) {
          for (int colInt = 0; colInt < colStatus; ++colInt) {
-            printCell(gameDisplay[rowInt][colInt]);
+            cellContents(gameDisplay[rowInt][colInt]);
             if (colInt != colStatus - 1) {
                System.out.print("|");
                //This prints the vertical bars to the grid
@@ -131,7 +128,7 @@ public class NickPatsTicTacToeFinalx {
          }
          System.out.println();
          if (rowInt != rowStatus - 1) {
-            System.out.println("==========="); 
+            System.out.println("============"); 
             // this prints the horizontal bars to the grid
          }
       }
@@ -140,6 +137,11 @@ public class NickPatsTicTacToeFinalx {
  
       public static void main(String[] args) {
       initGame();
+      String replay;
+    do {
+
+      System.out.println("Would you like to play some TicTacToe? if so, press Y");
+      replay = scan.nextLine();
       do {
          playerMove(Player); 
          // This updates currentRow and currentCol
@@ -149,7 +151,7 @@ public class NickPatsTicTacToeFinalx {
          //This prints the final board
          Player = (Player == tileContainsX) ? tileContainsO : tileContainsX;
          //* This code determines which player is currently going
-         
+
          if (stateOfBoard == gameEndedInDraw) {
             System.out.println("The game ended in a draw. want to play again?");
             //This prints if the game meets the requirements for a draw
@@ -169,8 +171,9 @@ public class NickPatsTicTacToeFinalx {
          System.out.print("O's current score is: \n");
          System.out.print(winCountForO);
          System.out.print("\n");
-
+         
       } while (stateOfBoard == gameInSession); // if game over hasnt been reached, repeat
-   }
- 
+      //replay = ""; my attempt to reset the value of replay to have the user prompted again
+    } while("Y".equalsIgnoreCase(replay));
+  }
 }

@@ -28,12 +28,13 @@ public class NickPatsTicTacToeFinalx {
    public static final int tileContainsX = 1;
    public static final int tileContainsO = 2;
        // grid contents
-
+   public static int winCountForX = 0;
+   public static int winCountForO = 0;
    //Player with the "mainInt" makes one move, with input checks
    //Updates variables "currentRow" and "currentCol".
    public static void playerMove(int mainInt) {
       boolean validInput = false;
-      
+
       do {
          if (mainInt == tileContainsX) {
             System.out.print("Player 1, Please enter your move. You will represent X ");
@@ -154,16 +155,22 @@ public class NickPatsTicTacToeFinalx {
             //This prints if the game meets the requirements for a draw
          } else if (stateOfBoard == OsWonGame) {
             System.out.println("O won, thanks for playing!");
+            winCountForO++;
             //This prints if the game meets the requirements for O winning
          } else if (stateOfBoard == XsWonGame) {
             System.out.println("X won, thanks for playing!");
+            winCountForX++;
             //This prints if the game meets the requirements for X winning
          }
-       
+         
+         System.out.print("X's current score is: \n");
+         System.out.print(winCountForX);
+         System.out.print("\n");
+         System.out.print("O's current score is: \n");
+         System.out.print(winCountForO);
+         System.out.print("\n");
 
       } while (stateOfBoard == gameInSession); // if game over hasnt been reached, repeat
    }
  
 }
-
-

@@ -1,8 +1,9 @@
 import java.util.Scanner;
 import java.util.*;
+
 public class NickPatsTicTacToeFinalx {
 
-   //https://www.youtube.com/watch?v=R51BIlAt_Hg
+       //https://www.youtube.com/watch?v=R51BIlAt_Hg
    public static Scanner scan = new Scanner(System.in);
        //simple scanner
    public static int rowStatus = 3, colStatus = 3; 
@@ -16,25 +17,26 @@ public class NickPatsTicTacToeFinalx {
    public static int Player;
         // the current player (based off of tileContainsX or tileContainsO)
    public static int currentRow, currentCol;
-         // The tic tac toe grid and the game status
+        // The tic tac toe grid and the game status
    public static int gameInSession = 0;
    public static int gameEndedInDraw = 1;
    public static int XsWonGame = 2;
    public static int OsWonGame = 3;
-      // game states
+        // game states
    public static final int tileIsEmpty = 0;
    public static final int tileContainsX = 1;
    public static final int tileContainsO = 2;
        // grid contents
    public static int winCountForX = 0;
    public static int winCountForO = 0;
-   //Player with the "mainInt" makes one move, with input checks
-   //Updates variables "currentRow" and "currentCol".
+       //Player with the "mainInt" makes one move, with input checks
+       //Updates variables "currentRow" and "currentCol".
    
    public static void playerMove(int mainInt) {
       boolean validInput = false;
 
       do {
+         validInput = false;
          if (mainInt == tileContainsX) {
             System.out.print("Player 1, Please enter your move. You will represent X ");
          } else {
@@ -42,14 +44,27 @@ public class NickPatsTicTacToeFinalx {
          }
          int rowInt = scan.nextInt() - 1;  // array index starts at 0 instead of 1
          int colInt = scan.nextInt() - 1;
+         //if(rowInt == 42){
+         //   System.exit(0);}
+         //if(colInt == 42){
+         //   System.exit(0); }
+         
          if (rowInt >= 0 && rowInt < rowStatus && colInt >= 0 && colInt < colStatus && gameDisplay[rowInt][colInt] == tileIsEmpty) {
             currentRow = rowInt;
             currentCol = colInt;
             gameDisplay[currentRow][currentCol] = mainInt;  // update tic tac toe grid content
             validInput = true;  // input okay, exit loop
-         } else {
-            System.out.println("You have entered an invalid move. Make sure that your move is in the correct format and please try again.");
-         }
+           //if(rowInt == 42){
+           // System.exit(0);}
+           //if(colInt == 42){
+           // System.exit(0);}
+         
+           
+           //} //if(rowInt != 1 && rowInt != 2 && rowInt != 3 && rowInt != 42 && colInt != 1 && colInt != 2 && colInt != 3 && colInt != 42  ) {
+            //System.out.println("You have entered an invalid move. Make sure that your move is in the correct format and please try again.");
+          }else
+            { System.out.println("You have entered an invalid move. Make sure that your move is in the correct format and please try again.");}
+        
       } while (!validInput);  // repeat until input is valid
    }
  
@@ -88,10 +103,10 @@ public class NickPatsTicTacToeFinalx {
       || gameDisplay[0][currentCol] == mainInt && gameDisplay[1][currentCol] == mainInt && gameDisplay[2][currentCol] == mainInt
          //This checks for the win condition of 3 in a column
                        
-      || currentRow == currentCol && gameDisplay[0][2] == mainInt && gameDisplay[1][1] == mainInt && gameDisplay[2][0] == mainInt
+      || currentRow == currentCol && gameDisplay[0][0] == mainInt && gameDisplay[1][1] == mainInt && gameDisplay[2][2] == mainInt
          //This checks for the win condition of 3 diagonally
                        
-      || currentRow + currentCol == 2 && gameDisplay[0][0] == mainInt && gameDisplay[1][1] == mainInt && gameDisplay[2][2] == mainInt);
+      || currentRow + currentCol == 2 && gameDisplay[0][2] == mainInt && gameDisplay[1][1] == mainInt && gameDisplay[2][0] == mainInt);
          //same win condition as above, but reversed
    }
      //https://stackoverflow.com/questions/18548265/testing-tic-tac-toe-win-condition
@@ -120,7 +135,7 @@ public class NickPatsTicTacToeFinalx {
          for (int colInt = 0; colInt < colStatus; ++colInt) {
             cellContents(gameDisplay[rowInt][colInt]);
             if (colInt != colStatus - 1) {
-               System.out.print("|");
+               System.out.print("||");
                //This prints the vertical bars to the grid
             }
             //(some) help with the for loop logic for printing the board:
@@ -128,7 +143,7 @@ public class NickPatsTicTacToeFinalx {
          }
          System.out.println();
          if (rowInt != rowStatus - 1) {
-            System.out.println("============"); 
+            System.out.println("=============="); 
             // this prints the horizontal bars to the grid
          }
       }
@@ -136,44 +151,69 @@ public class NickPatsTicTacToeFinalx {
    }
  
       public static void main(String[] args) {
-      initGame();
-      String replay;
-    do {
-
-      System.out.println("Would you like to play some TicTacToe? if so, press Y");
-      replay = scan.nextLine();
+    
+    String replay;
+    System.out.println("Would you like to play some TicTacToe? if so, press Y. If not, press N \n");
+    replay = scan.nextLine();
+    if("N".equalsIgnoreCase(replay)){
+    System.out.println("\n It's okay. I understand. We don't all have time to bug test for those we care about.");
+    }
+    
+    //while ("Y".equalsIgnoreCase(replay)) {  
       do {
-         playerMove(Player); 
-         // This updates currentRow and currentCol
-         updateGame(Player, currentRow, currentCol); 
-         // Thisupdates stateOfBoard
-         printTicTacToeGrid();
-         //This prints the final board
-         Player = (Player == tileContainsX) ? tileContainsO : tileContainsX;
-         //* This code determines which player is currently going
-
+         //System.out.println("If you ever feel like you want to quit, just type 42 instead of a choice");
+         //System.out.println("Because let's be honest, the real answer to everything is quitting when it gets hard \n");
+         //Note to reader: isnt it ironic this feature was cut?
+          
+           playerMove(Player); 
+           // This updates currentRow and currentCol
+           updateGame(Player, currentRow, currentCol); 
+           // Thisupdates stateOfBoard
+           printTicTacToeGrid();
+           //This prints the final board
+           Player = (Player == tileContainsX) ? tileContainsO : tileContainsX;
+           // player turn 
          if (stateOfBoard == gameEndedInDraw) {
-            System.out.println("The game ended in a draw. want to play again?");
-            //This prints if the game meets the requirements for a draw
-         } else if (stateOfBoard == OsWonGame) {
-            System.out.println("O won, thanks for playing!");
-            winCountForO++;
-            //This prints if the game meets the requirements for O winning
-         } else if (stateOfBoard == XsWonGame) {
-            System.out.println("X won, thanks for playing!");
+              System.out.println("The game ended in a draw. want to play again?");
+              System.out.println("Are you going to play again? Y/N");
+              replay = scan.nextLine();
+              //This prints if the game meets the requirements for a draw
+           } else if (stateOfBoard == OsWonGame) {
+              System.out.println("O won, whoever played X please git gud!\n");
+              winCountForO++;
+              System.out.println("Are you going to play again? Y/N");
+              replay = scan.nextLine();
+            if (winCountForO == 2){
+                System.out.println("X, You're really not gitting gud.");
+            }
+            if (winCountForO == 3){
+                System.out.println("It's not too late to go back home");
+
+            }
+
+          } else if (stateOfBoard == XsWonGame) {
+            System.out.println("X won, whoever played O please git gud!");
             winCountForX++;
-            //This prints if the game meets the requirements for X winning
-         }
+            System.out.println("Are you going to play again? Y/N");
+            replay = scan.nextLine();
+            if (winCountForX == 2){
+                System.out.println("O, You're really not gitting gud.");
+            }
+            if (winCountForX == 3){
+                System.out.println("It's not too late to go back home");
+            }
+            
+            }
          
-         System.out.print("X's current score is: \n");
-         System.out.print(winCountForX);
-         System.out.print("\n");
-         System.out.print("O's current score is: \n");
-         System.out.print(winCountForO);
-         System.out.print("\n");
+          System.out.print("X's current score is: \n");
+          System.out.print(winCountForX);
+          System.out.print("\n");
+          System.out.print("O's current score is: \n");
+          System.out.print(winCountForO);
+          System.out.print("\n");
          
-      } while (stateOfBoard == gameInSession); // if game over hasnt been reached, repeat
-      //replay = ""; my attempt to reset the value of replay to have the user prompted again
-    } while("Y".equalsIgnoreCase(replay));
+         } while (stateOfBoard == gameInSession); // if game over hasnt been reached, repeat
+        //System.out.println("It's okay. I understand. We don't all have time to bug test for those we care about.");
+    //}    
   }
 }

@@ -1,8 +1,7 @@
 import java.util.Scanner;
 import java.util.*;
 
-public class NickPatsTicTacToeFinalx {
-
+public class NickPatsTicTacToeFinalxx {
        //https://www.youtube.com/watch?v=R51BIlAt_Hg
    public static Scanner scan = new Scanner(System.in);
        //simple scanner
@@ -31,7 +30,7 @@ public class NickPatsTicTacToeFinalx {
    public static int winCountForO = 0;
        //Player with the "mainInt" makes one move, with input checks
        //Updates variables "currentRow" and "currentCol".
-   
+   public static String replay;
    public static void playerMove(int mainInt) {
       boolean validInput = false;
 
@@ -150,17 +149,15 @@ public class NickPatsTicTacToeFinalx {
       System.out.println();
    }
  
-      public static void main(String[] args) {
-    
-    String replay;
-    System.out.println("Would you like to play some TicTacToe? if so, press Y. If not, press N \n");
+   public static void mainMethod(){
+    System.out.println("Would you like to play some TicTacToe? if so, press Y. If not, press N");
     replay = scan.nextLine();
-    if("N".equalsIgnoreCase(replay)){
-    System.out.println("\n It's okay. I understand. We don't all have time to bug test for those we care about.");
+        if("N".equalsIgnoreCase(replay)){
+        System.out.println("\n It's okay. I understand. We don't all have time to bug test for those we care about.");
     }
     
-    //while ("Y".equalsIgnoreCase(replay)) {  
-      do {
+    while ("Y".equalsIgnoreCase(replay)) {  
+      //do {
          //System.out.println("If you ever feel like you want to quit, just type 42 instead of a choice");
          //System.out.println("Because let's be honest, the real answer to everything is quitting when it gets hard \n");
          //Note to reader: isnt it ironic this feature was cut?
@@ -177,12 +174,16 @@ public class NickPatsTicTacToeFinalx {
               System.out.println("The game ended in a draw. want to play again?");
               System.out.println("Are you going to play again? Y/N");
               replay = scan.nextLine();
+               if("Y".equalsIgnoreCase(replay)){
+                initGame();}
               //This prints if the game meets the requirements for a draw
-           } else if (stateOfBoard == OsWonGame) {
+         } else if (stateOfBoard == OsWonGame) {
               System.out.println("O won, whoever played X please git gud!\n");
               winCountForO++;
               System.out.println("Are you going to play again? Y/N");
               replay = scan.nextLine();
+            if("Y".equalsIgnoreCase(replay)){
+             initGame();}
             if (winCountForO == 2){
                 System.out.println("X, You're really not gitting gud.");
             }
@@ -191,11 +192,13 @@ public class NickPatsTicTacToeFinalx {
 
             }
 
-          } else if (stateOfBoard == XsWonGame) {
+         } else if (stateOfBoard == XsWonGame) {
             System.out.println("X won, whoever played O please git gud!");
             winCountForX++;
             System.out.println("Are you going to play again? Y/N");
             replay = scan.nextLine();
+            if("Y".equalsIgnoreCase(replay)){
+              initGame();}
             if (winCountForX == 2){
                 System.out.println("O, You're really not gitting gud.");
             }
@@ -212,8 +215,19 @@ public class NickPatsTicTacToeFinalx {
           System.out.print(winCountForO);
           System.out.print("\n");
          
-         } while (stateOfBoard == gameInSession); // if game over hasnt been reached, repeat
+         //} while (stateOfBoard == gameInSession); // if game over hasnt been reached, repeat
         //System.out.println("It's okay. I understand. We don't all have time to bug test for those we care about.");
-    //}    
+    }   
+    
+    
+   } 
+   
+      public static void main(String[] args) {
+    initGame();
+    mainMethod();
+    while(("Y".equalsIgnoreCase(replay))){
+        initGame();
+        mainMethod(); }
+    //why do none of my methods for mainMethod recursion work?
   }
 }

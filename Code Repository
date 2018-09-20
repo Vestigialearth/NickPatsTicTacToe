@@ -30,7 +30,8 @@ public class NickPatsTicTacToeFinalxx {
    public static int winCountForO = 0;
        //Player with the "mainInt" makes one move, with input checks
        //Updates variables "currentRow" and "currentCol".
-   public static String replay;
+  // public static String replay;
+   public static String replay = null;
    public static void playerMove(int mainInt) {
       boolean validInput = false;
 
@@ -118,7 +119,7 @@ public class NickPatsTicTacToeFinalxx {
    }
     
    // Creates the contents inside of the tic tac toe grid
-   public static void initGame() {
+   public static void beginGame() {
       for (int rowInt = 0; rowInt < rowStatus; ++rowInt) {
          for (int colInt = 0; colInt < colStatus; ++colInt) {
             gameDisplay[rowInt][colInt] = tileIsEmpty;  // all cells empty
@@ -153,7 +154,8 @@ public class NickPatsTicTacToeFinalxx {
     System.out.println("Would you like to play some TicTacToe? if so, press Y. If not, press N");
     replay = scan.nextLine();
         if("N".equalsIgnoreCase(replay)){
-        System.out.println("\n It's okay. I understand. We don't all have time to bug test for those we care about.");
+        System.out.println("\nNo,hey, It's okay. I understand. We don't all have time to bug test for those we care about.");
+        System.exit(0);
     }
     
     while ("Y".equalsIgnoreCase(replay)) {  
@@ -170,20 +172,24 @@ public class NickPatsTicTacToeFinalxx {
            //This prints the final board
            Player = (Player == tileContainsX) ? tileContainsO : tileContainsX;
            // player turn 
-         if (stateOfBoard == gameEndedInDraw) {
+      
+                 if (stateOfBoard == gameEndedInDraw) {
               System.out.println("The game ended in a draw. want to play again?");
               System.out.println("Are you going to play again? Y/N");
               replay = scan.nextLine();
                if("Y".equalsIgnoreCase(replay)){
-                initGame();}
+                beginGame();}
               //This prints if the game meets the requirements for a draw
          } else if (stateOfBoard == OsWonGame) {
+                        if (winCountForO == 1){
               System.out.println("O won, whoever played X please git gud!\n");
-              winCountForO++;
-              System.out.println("Are you going to play again? Y/N");
-              replay = scan.nextLine();
+            }  
+            winCountForO++;
+            //  System.out.println("Are you going to play again? Y/N");
+            replay = scan.nextLine();
             if("Y".equalsIgnoreCase(replay)){
-             initGame();}
+             beginGame();}
+
             if (winCountForO == 2){
                 System.out.println("X, You're really not gitting gud.");
             }
@@ -191,21 +197,33 @@ public class NickPatsTicTacToeFinalxx {
                 System.out.println("It's not too late to go back home");
 
             }
+            if (winCountForO == 4){
+                System.out.println("Okay, sorry bud. my program can't handle your ");
+                System.out.println("immense and unrelenting failure and is going to crash");
+                System.exit(0);
 
+            }
          } else if (stateOfBoard == XsWonGame) {
-            System.out.println("X won, whoever played O please git gud!");
+            if (winCountForX == 1){
+                System.out.println("X won, whoever played O please git gud!");
+            }       
             winCountForX++;
-            System.out.println("Are you going to play again? Y/N");
+            //System.out.println("Are you going to play again? Y/N");
             replay = scan.nextLine();
             if("Y".equalsIgnoreCase(replay)){
-              initGame();}
+              beginGame();}
             if (winCountForX == 2){
                 System.out.println("O, You're really not gitting gud.");
             }
             if (winCountForX == 3){
                 System.out.println("It's not too late to go back home");
             }
-            
+            if (winCountForX == 4){
+                System.out.println("Okay, sorry bud. my program can't handle your ");
+                System.out.println("immense and unrelenting failure and is going to crash");
+                System.exit(0);
+
+            }
             }
          
           System.out.print("X's current score is: \n");
@@ -214,8 +232,8 @@ public class NickPatsTicTacToeFinalxx {
           System.out.print("O's current score is: \n");
           System.out.print(winCountForO);
           System.out.print("\n");
-         
-         //} while (stateOfBoard == gameInSession); // if game over hasnt been reached, repeat
+          
+     
         //System.out.println("It's okay. I understand. We don't all have time to bug test for those we care about.");
     }   
     
@@ -223,11 +241,63 @@ public class NickPatsTicTacToeFinalxx {
    } 
    
       public static void main(String[] args) {
-    initGame();
+    beginGame();
     mainMethod();
-    while(("Y".equalsIgnoreCase(replay))){
-        initGame();
-        mainMethod(); }
+    do{
+        beginGame();
+        mainMethod();
+        
+                 if (stateOfBoard == gameEndedInDraw) {
+              System.out.println("The game ended in a draw. want to play again?");
+              System.out.println("Are you going to play again? Y/N");
+              replay = scan.nextLine();
+               if("Y".equalsIgnoreCase(replay)){
+                beginGame();}
+              //This prints if the game meets the requirements for a draw
+         } else if (stateOfBoard == OsWonGame) {
+              System.out.println("O won, whoever played X please git gud!\n");
+              winCountForO++;
+              System.out.println("Are you going to play again? Y/N");
+              replay = scan.nextLine();
+            if("Y".equalsIgnoreCase(replay)){
+             beginGame();  }
+
+            if (winCountForO == 2){
+                System.out.println("X, You're really not gitting gud.");
+            }
+            if (winCountForO == 3){
+                System.out.println("It's not too late to go back home");
+
+            }
+            if (winCountForO == 4){
+                System.out.println("Okay, sorry bud. my program can't handle your ");
+                System.out.println("immense and unrelenting failure and is going to crash");
+                System.exit(0);
+
+            }
+         } else if (stateOfBoard == XsWonGame) {
+            System.out.println("X won, whoever played O please git gud!");  
+            winCountForX++;
+            System.out.println("Are you going to play again? Y/N");
+            replay = scan.nextLine();
+            if("Y".equalsIgnoreCase(replay)){
+              beginGame(); }
+            if (winCountForX == 2){
+                System.out.println("O, You're really not gitting gud.");
+            }
+            if (winCountForX == 3){
+                System.out.println("It's not too late to go back home");
+            }
+            if (winCountForX == 4){
+                System.out.println("Okay, sorry bud. my program can't handle your ");
+                System.out.println("immense and unrelenting failure and is going to crash");
+                System.exit(0);
+
+            }
+            }
+            
+    }
+           while("y".equalsIgnoreCase(replay));
     //why do none of my methods for mainMethod recursion work?
   }
 }

@@ -5,12 +5,13 @@
   3. Design and implement a row and column system in order to both capture and be plugged into the table from step (3). --Done
   4. Make sure that the program runs and compiles --Done
   5. Make sure that run time is instant, or near instant. --Done
-  6. Make sure that there are no bugs, and all invalid inputs are protected by some error checking method --Mostly done
-  7. Bug test for any miscellaneous bugs --Done, the biggest bug is the input being crappy
-  8. Have other people try and break the code to double test for bugs 
+  6. Make sure that there are no bugs, and all invalid inputs are protected by some error checking method -- protected against non char 
+  or string input
+  7. Bug test for any miscellaneous bugs --Done 
+  8. Have other people try and break the code to double test for bugs --done
 
 
 We need to do the following:
---Expand the input so that it doesnt crash unless input is exactly in the right format [# #]
---Add an AI, even one that randomly places X's or O's
---Count wins for either X or O
+--Expand the input so that it doesnt crash unless input is exactly in the right format [# #] -did not do
+--Add an AI, even one that randomly places X's or O's -- scrapped
+--Count wins for either X or O -- Done

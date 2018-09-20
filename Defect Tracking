@@ -1,0 +1,20 @@
+FIXED BUGS
+{
+Implement Game loop Branch issues:
+  i. Game loop would not work properly, and game would only play once [WHILE INSTEAD OF DO WHILE LOOP]
+  ii. Tracker for amt of "O" and "X" wins was broken and would not track properly [ISSUE WAS MIXED VARIABLES]
+  iii. issue with "n" option continuing game and asking user if wanted to play game again [ISSUE WAS LACK OF EXIT COMMAND, RELIED ON REPAY 
+  VARIABLE STORAGE, DID NOT WORK]
+Broken Branch issues:
+  i. Recursion entirely broken and nonexistent [WHILE INSTEAD OF DO WHILE]
+  ii. The "Discouraging" remarks would play out of order and would potentially stack for no good reason [VARIABLE ISSUE]
+  iii. Master issue was game would not accept any input -- [ISSUE WAS THAT beginGame(); WAS DELETED FROM CODE]
+  iv. issue with certain ints being inputted would crash program [ISSUE WAS VARIABLE ISSUE]
+  v. "42" was scrapped due to program breaking bug [ISSUE UNKOWNN]
+}
+
+UNFIXED BUGS
+{
+FINAL BRANCH BUGS
+  i. Chars and string input break code where not requested
+}
